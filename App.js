@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { firebase } from "./src/firebase/config";
 import AsyncStorage from "@react-native-community/async-storage";
 import FirstBootScreen from "./src/components/FirstBootScreen";
 import InformationModal from "./src/components/InformationModal";
 import LoadingScreen from "./src/components/LoadingScreen";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 export default function App() {
   const [isLoading, setLoading] = useState(true);
@@ -41,18 +42,26 @@ export default function App() {
   };
 
   const fetchFirebase = (name) => {
-    firebase
-      .database()
-      .ref(`/places/${name}`)
-      .once("value")
-      .then((snapshot) => {
-        let data = snapshot.val();
-        // console.log(data.title);
-        setPlaceName(data.title);
-        setPlaceInfo(data.info);
-        setImgUrl(data.imgUrl);
-        setDialogVisible(true);
+    if (name.charAt(0) == "_") {
+      firebase
+        .database()
+        .ref(`/places/${name}`)
+        .once("value")
+        .then((snapshot) => {
+          let data = snapshot.val();
+          setPlaceName(data.title);
+          setPlaceInfo(data.info);
+          setImgUrl(data.imgUrl);
+          setDialogVisible(true);
+        })
+        .catch((e) => console.log(e, "Something went wrong"));
+    } else {
+      showMessage({
+        message: "ERROR",
+        description: "Invalid QR code. Please, try again",
+        type: "info",
       });
+    }
   };
 
   const handleBarCodeScanned = ({ data }) => {
@@ -100,6 +109,7 @@ export default function App() {
       {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
       )}
+      <FlashMessage position="top" />
     </View>
   );
 }

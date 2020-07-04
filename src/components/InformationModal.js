@@ -34,8 +34,8 @@ const InformationModal = ({
         style={{
           alignSelf: "center",
           borderRadius: 10,
-          //   aspectRatio: 1.5,
-          //   resizeMode: "contain",
+          aspectRatio: 1.5,
+          resizeMode: "contain",
           width: 100,
           height: 100,
         }}
