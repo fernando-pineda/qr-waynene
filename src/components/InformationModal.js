@@ -3,32 +3,35 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import { Dialog } from "react-native-simple-dialogs";
 import * as Speech from "expo-speech";
 import { Image } from "react-native-elements";
+import { savePlace } from "../library/storage/storageFunctions";
 
-const InformationModal = ({
-  setDialogVisible,
-  dialogVisible,
-  name,
-  info,
-  imgUrl,
-}) => {
+const InformationModal = ({ setDialogVisible, dialogVisible, place }) => {
   const speechOptions = {
     language: "es-419",
     pitch: 1,
   };
 
+  if (place.length == 0) {
+    return <></>;
+  }
+
+  const handleSavePlace = () => {
+    savePlace(place);
+    setDialogVisible(false);
+    Speech.stop();
+  };
   return (
     <Dialog
-      onShow={() => Speech.speak(info, speechOptions)}
+      onShow={() => Speech.speak(place.info, speechOptions)}
       visible={dialogVisible}
       onTouchOutside={() => {
         setDialogVisible(false);
-        console.log(imgUrl);
         Speech.stop();
       }}
       //   animationType={"slide"}
       title={"Información del lugar"}
     >
-      <Text>{name}</Text>
+      <Text>{place.title}</Text>
 
       <Image
         style={{
@@ -39,10 +42,11 @@ const InformationModal = ({
           width: 100,
           height: 100,
         }}
-        source={{ uri: imgUrl }}
+        source={{ uri: place.imgUrl }}
       />
 
-      <Text style={{ marginBottom: 10 }}>{info}</Text>
+      <Text style={{ marginBottom: 10 }}>{place.info}</Text>
+      <Button title="SAVE" onPress={() => handleSavePlace()} />
     </Dialog>
   );
 };
