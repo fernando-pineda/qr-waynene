@@ -1,17 +1,16 @@
 {
-  "name": "testAr",
-  "displayName": "testAr",
+  "name": "WayNené - Escáner Turístico",
+  "displayName": "WayNené - Escáner Turístico",
   "expo": {
-    "name": "testAr",
-    "slug": "testAr",
+    "name": "WayNené - Escáner Turístico",
+    "slug": "First WayNene build",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  }
+    "platforms": ["ios", "android", "web"],
+    "assetBundlePatterns": ["**/*"],
+    "splash": {
+      "image": "./src/assets/imageMerida.png",
+      "backgroundColor": "white"
+    }
+  },
+  "app-icon": "./src/assets/imageMerida.png"
 }

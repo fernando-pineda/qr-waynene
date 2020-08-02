@@ -25,6 +25,7 @@ import { FloatingAction } from "react-native-floating-action";
 function Places({ navigation }) {
   const [places, setPlaces] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const [arePlacesAvailable, setPlacesAvailable] = useState();
 
   useEffect(() => {
     getPlaces();
@@ -56,12 +57,8 @@ function Places({ navigation }) {
     }, 150);
   };
 
-  if (places === null) {
-    places = [];
-  }
-
   const renderPlaces = () => {
-    if (places.length == 0) {
+    if (places === null || places.length == 0) {
       return (
         <View
           style={{
@@ -187,7 +184,7 @@ function Camera({ navigation }) {
   const [scanned, setScanned] = useState(false);
   const [color, setColor] = useState("gray");
   const [easter, setEaster] = useState(0);
-  const [isTTSEnabled, setTTSvalue] = useState();
+  const [isTTSEnabled, setTTSvalue] = useState(true);
 
   useEffect(() => {
     (async () => {
