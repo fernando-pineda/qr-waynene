@@ -18,7 +18,7 @@ export const savePlace = async (place) => {
 
     if (match) {
       return showMessage({
-        message: "This place is already added to your library!",
+        message: "¡Este lugar ya se encuentra guardado!",
         type: "info",
       });
     } else {
@@ -30,10 +30,10 @@ export const savePlace = async (place) => {
 
       await AsyncStorage.setItem("PLACES", JSON.stringify(newPlacesArray));
 
-      console.log(`${place.title} successfully added to the user library`);
+      // console.log(`${place.title} successfully added to the user library`);
 
       return showMessage({
-        message: `Successfully added ${place.title} to your library`,
+        message: `Se ha añadido ${place.title} exitosamente a tu biblioteca`,
         type: "info",
       });
     }
@@ -64,7 +64,7 @@ export const removePlace = async (place) => {
       console.log(`${place.title} successfully removed from the library`);
 
       return showMessage({
-        message: `Successfully removed ${place.title} from your library`,
+        message: `Se ha eliminado ${place.title} de la biblioteca`,
         type: "info",
       });
     }

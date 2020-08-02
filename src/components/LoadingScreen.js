@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Image,
   Text,
@@ -7,10 +7,7 @@ import {
   ActivityIndicator,
   ImageBackground,
 } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const LoadingScreen = () => {
   return (
@@ -22,12 +19,12 @@ const LoadingScreen = () => {
         <Text style={styles.textTop}>¡HOLA!</Text>
 
         <Text style={styles.textBottom}>
-          ¡Te damos la bienvenida a Way Nene, informacion y cultura!
+          Bienvenido a WayNené - Información y Cultura
         </Text>
 
         <ActivityIndicator
           size="large"
-          color="#c70039"
+          color="white"
           style={{ marginTop: 50 }}
         />
 
@@ -37,9 +34,8 @@ const LoadingScreen = () => {
           style={{
             position: "absolute",
             bottom: 0,
-            width: 250,
+            width: 100,
             height: 250,
-            left: 100,
           }}
         ></Image>
       </ImageBackground>
@@ -72,7 +68,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingBottom: 50,
     alignItems: "center",
-    fontSize: 100,
+    fontSize: 80,
     color: "white",
   },
   img: {
